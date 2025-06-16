@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect With Us</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="registrationForm" onsubmit="return submitForm(event)">
+            <h2 style="text-align: center;">Connect With Us</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+
+            <label for="college">College Name:</label>
+            <input type="text" id="college" name="college">
+
+            <label for="branch">Branch:</label>
+            <input type="text" id="branch" name="branch">
+
+            <label for="year">Year:</label>
+            <input type="text" id="year" name="year">
+
+            <label for="problem">Problem You Are Facing:</label>
+            <select id="problem" name="problem">
+                <option value="">Select</option>
+                <option value="Academics">Academics</option>
+                <option value="Financial">Financial</option>
+                <option value="Career">Career</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="uni">Connect with Uni:</label>
+            <select id="uni" name="uni" onchange="updateMentorOptions()">
+                <option value="">Select</option>
+                <option value="IITchennai">IIT Chennai</option>
+                <option value="VIT">VIT</option>
+                <option value="SRM">SRM</option>
+                <option value="NITTrichy">NIT Trichy</option>
+                <option value="IITKharagpur">IIT Kharagpur</option>
+                <option value="IITkanpur">IIT Kanpur</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="mentorOptions">Choose the mentor/alumni:</label>
+            <select id="mentorOptions" name="mentorOptions">
+                <option value="">Select</option>
+            </select>
+
+            <label for="reason">Reason:</label>
+            <textarea id="reason" name="reason" rows="4"></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent form submission
+            // Add your form submission logic here
+            console.log("Form submitted");
+        }
+
+        function updateMentorOptions() {
+            // Define options for each university
+            const mentorOptions = {
+                "IITchennai": ["Arjun", "Darvini", "Mahi", "Sindhu", "Vidhathri"],
+                "VIT": ["Hansika", "Smily"],
+                "SRM": ["Maggie", "Manee", "Rakii"],
+                "NITTrichy": ["Oshitha", "Poojitha"],
+                "IITKharagpur": ["Chehak", "Bhavya"],
+                "IITkanpur": ["Thanmai", "Abhay"],
+                // Add options for other universities as needed
+            };
+
+            // Get the selected university from the uni dropdown
+            const selectedUniversity = document.getElementById("uni").value;
+
+            // Get the mentorOptions select element
+            const mentorSelect = document.getElementById("mentorOptions");
+
+            // Clear existing options in the mentorOptions dropdown
+            mentorSelect.innerHTML = "";
+
+            // Add new options based on the selected university
+            if (mentorOptions[selectedUniversity]) {
+                mentorOptions[selectedUniversity].forEach(function(option) {
+                    // Create a new option element
+                    const opt = document.createElement("option");
+                    opt.value = option;
+                    opt.textContent = option;
+                    
+                    // Append the option to the mentorSelect dropdown
+                    mentorSelect.appendChild(opt);
+                });
+            } else {
+                // Add a default option if no options are found for the selected university
+                const defaultOption = document.createElement("option");
+                defaultOption.value = "";
+                defaultOption.text = "No options available";
+                mentorSelect.appendChild(defaultOption);
+            }
+        }
+    </script>
+</body>
+
+</html>
